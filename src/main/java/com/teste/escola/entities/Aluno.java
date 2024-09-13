@@ -1,6 +1,5 @@
 package com.teste.escola.entities;
 
-import java.io.Serializable;
 import java.time.Instant;
 import java.util.Objects;
 
@@ -15,9 +14,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "tb_aluno")
-public class Aluno implements Serializable {
-	private static final long serialVersionUID = 1L;
-	
+public class Aluno {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

@@ -12,14 +12,14 @@ public class AlunoDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
-	 @NotBlank
+	@NotBlank
 	private String name;
-	 @NotBlank
-	 @Positive
+	@NotBlank
+	@Positive
 	private Integer age;
-	
+
 	private ClasseDTO classe;
-	
+
 	public AlunoDTO() {
 	}
 
@@ -29,6 +29,7 @@ public class AlunoDTO implements Serializable {
 		this.age = age;
 		this.classe = classe;
 	}
+
 	public AlunoDTO(Aluno aluno) {
 		id = aluno.getId();
 		name = aluno.getName();
@@ -67,6 +68,5 @@ public class AlunoDTO implements Serializable {
 	public void setClasse(ClasseDTO classe) {
 		this.classe = classe;
 	}
-	
-	
+
 }

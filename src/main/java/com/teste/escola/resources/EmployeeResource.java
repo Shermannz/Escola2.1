@@ -1,5 +1,6 @@
 package com.teste.escola.resources;
 
+
 import java.net.URI;
 
 import javax.validation.Valid;
@@ -18,42 +19,40 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.teste.escola.dto.UserDTO;
-import com.teste.escola.dto.UserInsertDTO;
-import com.teste.escola.dto.UserUpdateDTO;
-import com.teste.escola.services.UserService;
+import com.teste.escola.dto.EmployeeDTO;
+import com.teste.escola.services.EmployeeService;
 
 @RestController
-@RequestMapping(value = "/users")
-public class UserResource {
+@RequestMapping(value = "/employees")
+public class EmployeeResource {
 	
 	@Autowired
-	UserService service;
+	EmployeeService service;
 	
 	@GetMapping
-	public ResponseEntity<Page<UserDTO>> findAll(Pageable pageable){
-		Page<UserDTO> list = service.findAll(pageable);
+	public ResponseEntity<Page<EmployeeDTO>> findAll(Pageable pageable){
+		Page<EmployeeDTO> list = service.findAll(pageable);
 		return ResponseEntity.ok().body(list);
 	}
 	
 	@GetMapping(value = "{id}")
-	public ResponseEntity<UserDTO> findById(@PathVariable Long id){
-		UserDTO prof = service.findById(id);
-		return ResponseEntity.ok().body(prof);
+	public ResponseEntity<EmployeeDTO> findById(@PathVariable Long id){
+		EmployeeDTO emp = service.findById(id);
+		return ResponseEntity.ok().body(emp);
 	}
 	
 	@PostMapping
-	public ResponseEntity<UserDTO> insert(@Valid @RequestBody UserInsertDTO dto){
-		UserDTO dtos = service.insert(dto);
+	public ResponseEntity<EmployeeDTO> insert(@Valid @RequestBody EmployeeDTO dto){
+		dto = service.insert(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 		.buildAndExpand(dto.getId()).toUri();
-		return ResponseEntity.created(uri).body(dtos);
+		return ResponseEntity.created(uri).body(dto);
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<UserDTO> update(@PathVariable Long id,@Valid @RequestBody UserUpdateDTO dto){
-		UserDTO newdto = service.update(id, dto);
-		return ResponseEntity.ok().body(newdto);
+	public ResponseEntity<EmployeeDTO> update(@PathVariable Long id,@Valid  @RequestBody EmployeeDTO dto){
+		dto = service.update(id, dto);
+		return ResponseEntity.ok().body(dto);
 	}
 	
 	@DeleteMapping(value = "/{id}")

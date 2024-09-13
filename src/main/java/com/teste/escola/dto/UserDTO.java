@@ -1,6 +1,5 @@
 package com.teste.escola.dto;
 
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -10,28 +9,26 @@ import javax.validation.constraints.Size;
 
 import com.teste.escola.entities.User;
 
-public class UserDTO implements Serializable {
-	private static final long serialVersionUID = 1L;
-
+public class UserDTO {
 	private Long id;
-    @NotBlank
-    @Size(min = 5, max = 60, message = "5 ate 6 caracteres")
+	@NotBlank
+	@Size(min = 5, max = 60, message = "5 ate 6 caracteres")
 	private String name;
-    @NotBlank
+	@NotBlank
 	@Email(message = "Entrar com email valido")
 	private String email;
-	
-	Set<RoleDTO> role = new HashSet<>(); 
-	
-    public UserDTO() {
-    }
+	private String password;
+	Set<RoleDTO> role = new HashSet<>();
+
+	public UserDTO() {
+	}
 
 	public UserDTO(Long id, String name, String email) {
 		this.id = id;
 		this.name = name;
 		this.email = email;
 	}
-	
+
 	public UserDTO(User user) {
 		this.id = user.getId();
 		this.name = user.getName();
@@ -65,6 +62,14 @@ public class UserDTO implements Serializable {
 
 	public Set<RoleDTO> getRole() {
 		return role;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 }

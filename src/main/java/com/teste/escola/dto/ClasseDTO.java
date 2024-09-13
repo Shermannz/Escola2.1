@@ -11,32 +11,31 @@ import com.teste.escola.entities.Aluno;
 import com.teste.escola.entities.Aula;
 import com.teste.escola.entities.Classe;
 
-public class ClasseDTO implements Serializable{
+public class ClasseDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private Long id;
-	 @NotBlank
+	@NotBlank
 	private Integer number;
 
 	List<AlunoDTO> alunos = new ArrayList<>();
 
 	List<AulaDTO> aula = new ArrayList<>();
-	
-	
+
 	public ClasseDTO() {
 	}
-	
+
 	public ClasseDTO(Long id, Integer number) {
 		this.id = id;
 		this.number = number;
 	}
-	
+
 	public ClasseDTO(Classe classe) {
 		id = classe.getId();
 		number = classe.getNumber();
 	}
-	
-	public ClasseDTO(Classe classe,Set<Aula> aula,Set<Aluno> alunos) {
+
+	public ClasseDTO(Classe classe, Set<Aula> aula, Set<Aluno> alunos) {
 		id = classe.getId();
 		number = classe.getNumber();
 		aula.forEach(x -> this.aula.add(new AulaDTO(x)));

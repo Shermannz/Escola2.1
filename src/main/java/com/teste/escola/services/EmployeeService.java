@@ -14,50 +14,50 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.teste.escola.dto.ProfessorDTO;
+import com.teste.escola.dto.EmployeeDTO;
 import com.teste.escola.dto.RoleDTO;
-import com.teste.escola.entities.Professor;
+import com.teste.escola.entities.Employee;
 import com.teste.escola.entities.Role;
-import com.teste.escola.repositories.ProfessorRepository;
+import com.teste.escola.repositories.EmployeeRepository;
 import com.teste.escola.repositories.RoleRepository;
 import com.teste.escola.services.exceptions.ResourceNotFoundException;
 
-@Service("professorService")
-public class ProfessorService implements UserDetailsService {
+@Service("employeeService")
+public class EmployeeService implements UserDetailsService {
 
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 
 	@Autowired
-	private ProfessorRepository repository;
+	private EmployeeRepository repository;
 
 	@Autowired
 	private RoleRepository roleRepository;
 
-	public Page<ProfessorDTO> findAll(Pageable pageable) {
-		Page<Professor> list = repository.findAll(pageable);
-		return list.map(x -> new ProfessorDTO(x, x.getAula()));
+	public Page<EmployeeDTO> findAll(Pageable pageable) {
+		Page<Employee> list = repository.findAll(pageable);
+		return list.map(x -> new EmployeeDTO(x));
 	}
 
-	public ProfessorDTO findById(Long id) {
-		Optional<Professor> professor = repository.findById(id);
-		Professor prof = professor.orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
-		return new ProfessorDTO(prof, prof.getAula());
+	public EmployeeDTO findById(Long id) {
+		Optional<Employee> employee = repository.findById(id);
+		Employee emp = employee.orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
+		return new EmployeeDTO(emp);
 	}
 
-	public ProfessorDTO insert(ProfessorDTO dto) {
-		Professor entity = new Professor();
+	public EmployeeDTO insert(EmployeeDTO dto) {
+		Employee entity = new Employee();
 		copyToEntity(dto, entity);
 		entity = repository.save(entity);
-		return new ProfessorDTO(entity);
+		return new EmployeeDTO(entity);
 	}
 
-	public ProfessorDTO update(Long id, ProfessorDTO dto) {
+	public EmployeeDTO update(Long id, EmployeeDTO dto) {
 		try {
-			Professor entity = repository.getById(id);
+			Employee entity = repository.getById(id);
 			copyToEntity(dto, entity);
 			entity = repository.save(entity);
-			return new ProfessorDTO(entity);
+			return new EmployeeDTO(entity);
 		} catch (EntityNotFoundException e) {
 			throw new ResourceNotFoundException("id not found " + id);
 		}
@@ -71,11 +71,10 @@ public class ProfessorService implements UserDetailsService {
 		}
 	}
 
-	private void copyToEntity(ProfessorDTO dto, Professor entity) {
+	private void copyToEntity(EmployeeDTO dto, Employee entity) {
 		entity.setName(dto.getName());
 		entity.setEmail(dto.getEmail());
 		entity.setPassword(passwordEncoder.encode(dto.getPassword()));
-		entity.setSubject(dto.getSubject());
 		for (RoleDTO roleDTO : dto.getRole()) {
 			Role role = roleRepository.getById(roleDTO.getId());
 			entity.getRoles().add(role);

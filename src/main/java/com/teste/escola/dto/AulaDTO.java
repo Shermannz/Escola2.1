@@ -11,14 +11,14 @@ public class AulaDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
-	 @NotBlank
+	@NotBlank
 	private String day;
-	 @NotBlank
-	 @Positive
+	@NotBlank
+	@Positive
 	private Integer num;
 	private ProfessorDTO professor;
 	private ClasseDTO classe;
-	
+
 	public AulaDTO() {
 	}
 
@@ -77,7 +77,5 @@ public class AulaDTO implements Serializable {
 	public void setClasse(ClasseDTO classe) {
 		this.classe = classe;
 	}
-	
-	
-	
+
 }
