@@ -3,24 +3,17 @@ package com.teste.escola.dto;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-
-import javax.validation.constraints.NotBlank;
 
 import com.teste.escola.entities.Aluno;
-import com.teste.escola.entities.Aula;
 import com.teste.escola.entities.Classe;
 
 public class ClasseDTO implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private Long id;
-	@NotBlank
 	private Integer number;
 
-	List<AlunoDTO> alunos = new ArrayList<>();
-
-	List<AulaDTO> aula = new ArrayList<>();
+	List<SimpleAlunoDTO> alunos = new ArrayList<>();
 
 	public ClasseDTO() {
 	}
@@ -33,13 +26,9 @@ public class ClasseDTO implements Serializable {
 	public ClasseDTO(Classe classe) {
 		id = classe.getId();
 		number = classe.getNumber();
-	}
-
-	public ClasseDTO(Classe classe, Set<Aula> aula, Set<Aluno> alunos) {
-		id = classe.getId();
-		number = classe.getNumber();
-		aula.forEach(x -> this.aula.add(new AulaDTO(x)));
-		alunos.forEach(x -> this.alunos.add(new AlunoDTO(x)));
+		for (Aluno aluno : classe.getAlunos()) {
+			alunos.add(new SimpleAlunoDTO(aluno));
+		}
 	}
 
 	public Long getId() {
@@ -58,11 +47,8 @@ public class ClasseDTO implements Serializable {
 		this.number = number;
 	}
 
-	public List<AlunoDTO> getAlunos() {
+	public List<SimpleAlunoDTO> getAlunos() {
 		return alunos;
 	}
 
-	public List<AulaDTO> getAula() {
-		return aula;
-	}
 }
