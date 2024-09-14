@@ -8,10 +8,12 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.teste.escola.entities.enums.Subject;
+
 @Entity
 @Table(name = "tb_professor")
 public class Professor extends User {
-	private String subject;
+	private Subject subject;
 
 	@OneToMany(mappedBy = "professor", cascade = CascadeType.ALL)
 	Set<Aula> aula = new HashSet<>();
@@ -19,8 +21,8 @@ public class Professor extends User {
 	public Professor() {
 	}
 
-	public Professor(Long id, String name, Integer age, String subject) {
-		super(id, name, name, subject);
+	public Professor(Long id, String name, String email, String password, Subject subject) {
+		super(id, name, email, password);
 		this.subject = subject;
 	}
 
@@ -28,11 +30,11 @@ public class Professor extends User {
 		return aula;
 	}
 
-	public String getSubject() {
+	public Subject getSubject() {
 		return subject;
 	}
 
-	public void setSubject(String subject) {
+	public void setSubject(Subject subject) {
 		this.subject = subject;
 	}
 

@@ -8,9 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -18,12 +15,13 @@ import com.teste.escola.dto.ProfessorDTO;
 import com.teste.escola.dto.RoleDTO;
 import com.teste.escola.entities.Professor;
 import com.teste.escola.entities.Role;
+import com.teste.escola.entities.enums.Subject;
 import com.teste.escola.repositories.ProfessorRepository;
 import com.teste.escola.repositories.RoleRepository;
 import com.teste.escola.services.exceptions.ResourceNotFoundException;
 
-@Service("professorService")
-public class ProfessorService implements UserDetailsService {
+@Service
+public class ProfessorService extends UserService {
 
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
@@ -75,15 +73,11 @@ public class ProfessorService implements UserDetailsService {
 		entity.setName(dto.getName());
 		entity.setEmail(dto.getEmail());
 		entity.setPassword(passwordEncoder.encode(dto.getPassword()));
-		entity.setSubject(dto.getSubject());
+		entity.setSubject(Subject.valueOf(dto.getSubject()));
 		for (RoleDTO roleDTO : dto.getRole()) {
 			Role role = roleRepository.getById(roleDTO.getId());
 			entity.getRoles().add(role);
 		}
 	}
 
-	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		return repository.findByEmail(username);
-	}
 }

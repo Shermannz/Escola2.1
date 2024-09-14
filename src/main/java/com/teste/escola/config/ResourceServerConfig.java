@@ -16,7 +16,6 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 	private JwtTokenStore tokenStore;
 
 	private static final String[] PUBLIC = { "/oauth/token", "/h2-console/**" };
-	
 
 	@Override
 	public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
@@ -29,6 +28,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 		http.headers().frameOptions().disable();
 
 		http.authorizeRequests().antMatchers(PUBLIC).permitAll();
+		http.authorizeRequests().anyRequest().authenticated();
 	}
 
 }

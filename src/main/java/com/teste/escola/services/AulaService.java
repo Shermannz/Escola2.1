@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.teste.escola.dto.AulaDTO;
+import com.teste.escola.dto.SimpleAulaDTO;
 import com.teste.escola.entities.Aula;
 import com.teste.escola.repositories.AulaRepository;
 import com.teste.escola.repositories.ClasseRepository;
@@ -26,20 +27,20 @@ public class AulaService {
 	private AulaRepository repository;
 	
 	@Autowired
-	private ProfessorRepository Prepository;
+	private ProfessorRepository professorRepository;
 	
 	@Autowired
-	private ClasseRepository Crepository;
+	private ClasseRepository classeRepository;
 	
-	public Page<AulaDTO> findAll(Pageable pageable){
+	public Page<SimpleAulaDTO> findAll(Pageable pageable){
 		Page<Aula> aula = repository.findAll(pageable);
-		return aula.map(x -> new AulaDTO(x));
+		return aula.map(x -> new SimpleAulaDTO(x));
 	}
 	
-	public AulaDTO findById(Long id){
+	public SimpleAulaDTO findById(Long id){
 		Optional<Aula> aula = repository.findById(id);
 		Aula aulas = aula.orElseThrow(() -> new ResourceNotFoundException("Entity not found"));
-		return new AulaDTO(aulas);
+		return new SimpleAulaDTO(aulas);
 	}
 	
 	public AulaDTO insert(AulaDTO dto) {
@@ -72,8 +73,8 @@ public class AulaService {
 	private void copyToEntity(AulaDTO dto, Aula entity) {
 		entity.setDay(dto.getDay());
 		entity.setNum(dto.getNum());
-		entity.setProfessor(Prepository.getById(dto.getProfessor().getId()));
-		entity.setClasse(Crepository.getById(dto.getClasse().getId()));
+		entity.setProfessor(professorRepository.getById(dto.getProfessor().getId()));
+		entity.setClasse(classeRepository.getById(dto.getClasse().getId()));
 	}
 
 }

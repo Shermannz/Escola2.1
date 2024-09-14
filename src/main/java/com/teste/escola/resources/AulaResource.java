@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.teste.escola.dto.AulaDTO;
+import com.teste.escola.dto.SimpleAulaDTO;
 import com.teste.escola.services.AulaService;
 
 @RestController
@@ -29,14 +30,14 @@ public class AulaResource {
 	private AulaService service;
 	
 	@GetMapping
-	public ResponseEntity<Page<AulaDTO>> findAll(Pageable pageable){
-		Page<AulaDTO> dto = service.findAll(pageable);
+	public ResponseEntity<Page<SimpleAulaDTO>> findAll(Pageable pageable){
+		Page<SimpleAulaDTO> dto = service.findAll(pageable);
 		return ResponseEntity.ok().body(dto);
 	}
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<AulaDTO> findById(@PathVariable Long id){
-		AulaDTO dto = service.findById(id);
+	public ResponseEntity<SimpleAulaDTO> findById(@PathVariable Long id){
+		SimpleAulaDTO dto = service.findById(id);
 		return ResponseEntity.ok().body(dto);
 	}
 	

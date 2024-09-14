@@ -8,9 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -22,8 +19,8 @@ import com.teste.escola.repositories.EmployeeRepository;
 import com.teste.escola.repositories.RoleRepository;
 import com.teste.escola.services.exceptions.ResourceNotFoundException;
 
-@Service("employeeService")
-public class EmployeeService implements UserDetailsService {
+@Service
+public class EmployeeService extends UserService {
 
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
@@ -79,10 +76,5 @@ public class EmployeeService implements UserDetailsService {
 			Role role = roleRepository.getById(roleDTO.getId());
 			entity.getRoles().add(role);
 		}
-	}
-
-	@Override
-	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		return repository.findByEmail(username);
 	}
 }

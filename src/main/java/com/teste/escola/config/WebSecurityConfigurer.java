@@ -1,7 +1,6 @@
 package com.teste.escola.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,19 +13,17 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
-public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter{
-    @Qualifier("employeeService")
+public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private UserDetailsService detailsService;
-	
+
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
-	
+
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(detailsService).passwordEncoder(passwordEncoder);
 	}
-
 
 	@Override
 	public void configure(WebSecurity web) throws Exception {
@@ -38,6 +35,5 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter{
 	protected AuthenticationManager authenticationManager() throws Exception {
 		return super.authenticationManager();
 	}
-	
-	
+
 }

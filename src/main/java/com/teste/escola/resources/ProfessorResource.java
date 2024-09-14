@@ -1,6 +1,5 @@
 package com.teste.escola.resources;
 
-
 import java.net.URI;
 
 import javax.validation.Valid;
@@ -25,43 +24,40 @@ import com.teste.escola.services.ProfessorService;
 @RestController
 @RequestMapping(value = "/professores")
 public class ProfessorResource {
-	
+
 	@Autowired
 	ProfessorService service;
-	
+
 	@GetMapping
-	public ResponseEntity<Page<ProfessorDTO>> findAll(Pageable pageable){
+	public ResponseEntity<Page<ProfessorDTO>> findAll(Pageable pageable) {
 		Page<ProfessorDTO> list = service.findAll(pageable);
-		list.forEach(x -> x.getAula().forEach(xx -> xx.setProfessor(null)));
 		return ResponseEntity.ok().body(list);
 	}
-	
+
 	@GetMapping(value = "{id}")
-	public ResponseEntity<ProfessorDTO> findById(@PathVariable Long id){
+	public ResponseEntity<ProfessorDTO> findById(@PathVariable Long id) {
 		ProfessorDTO prof = service.findById(id);
-		prof.getAula().forEach(x -> x.setProfessor(null));
 		return ResponseEntity.ok().body(prof);
 	}
-	
+
 	@PostMapping
-	public ResponseEntity<ProfessorDTO> insert(@Valid @RequestBody ProfessorDTO dto){
+	public ResponseEntity<ProfessorDTO> insert(@Valid @RequestBody ProfessorDTO dto) {
 		dto = service.insert(dto);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-		.buildAndExpand(dto.getId()).toUri();
+				.buildAndExpand(dto.getId()).toUri();
 		return ResponseEntity.created(uri).body(dto);
 	}
-	
+
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<ProfessorDTO> update(@PathVariable Long id,@Valid  @RequestBody ProfessorDTO dto){
+	public ResponseEntity<ProfessorDTO> update(@PathVariable Long id, @Valid @RequestBody ProfessorDTO dto) {
 		dto = service.update(id, dto);
 		return ResponseEntity.ok().body(dto);
 	}
-	
+
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<Void> deleteById(@PathVariable Long id){
+	public ResponseEntity<Void> deleteById(@PathVariable Long id) {
 		service.deleteById(id);
 		return ResponseEntity.noContent().build();
 	}
-	
-	
+
 }

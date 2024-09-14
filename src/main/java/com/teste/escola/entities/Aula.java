@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.teste.escola.entities.enums.Turn;
+
 @Entity
 @Table(name = "tb_aula")
 public class Aula {
@@ -18,11 +20,12 @@ public class Aula {
 	private Long id;
 	private String day;
 	private Integer num;
-	
+	private Turn turn;
+
 	@ManyToOne
 	@JoinColumn(name = "professor_id")
 	private Professor professor;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "classe_id")
 	private Classe classe;
@@ -30,13 +33,14 @@ public class Aula {
 	public Aula() {
 	}
 
-	
-	public Aula(Long id, String day, Integer num, Classe classe) {
+	public Aula(Long id, String day, Integer num, Classe classe, Turn turn) {
 		this.id = id;
 		this.day = day;
 		this.num = num;
 		this.classe = classe;
+		this.turn = turn;
 	}
+
 	public Aula(Long id, String day, Integer num, Professor professor, Classe classe) {
 		this.id = id;
 		this.day = day;
@@ -76,12 +80,21 @@ public class Aula {
 	public void setProfessor(Professor professor) {
 		this.professor = professor;
 	}
+
 	public Classe getClasse() {
 		return classe;
 	}
 
 	public void setClasse(Classe classe) {
 		this.classe = classe;
+	}
+
+	public Turn getTurn() {
+		return turn;
+	}
+
+	public void setTurn(Turn turn) {
+		this.turn = turn;
 	}
 
 	@Override
@@ -100,6 +113,5 @@ public class Aula {
 		Aula other = (Aula) obj;
 		return Objects.equals(id, other.id);
 	}
-	
-	
+
 }

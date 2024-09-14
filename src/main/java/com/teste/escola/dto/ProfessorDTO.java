@@ -19,7 +19,7 @@ public class ProfessorDTO extends UserDTO {
 	}
 
 	public ProfessorDTO(Long id, String name, String email, String password, String subject) {
-		super(id, name, email);
+		super(id, name, email, password);
 		this.subject = subject;
 	}
 
@@ -28,7 +28,7 @@ public class ProfessorDTO extends UserDTO {
 		setName(professor.getName());
 		setEmail(professor.getEmail());
 		setPassword(professor.getPassword());
-		this.subject = professor.getSubject();
+		this.subject = professor.getSubject().toString();
 	}
 
 	public ProfessorDTO(Professor professor, Set<Aula> aula) {

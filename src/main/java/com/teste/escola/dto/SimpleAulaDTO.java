@@ -6,40 +6,42 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
 
 import com.teste.escola.entities.Aula;
-import com.teste.escola.entities.enums.Turn;
 
-public class AulaDTO implements Serializable {
+public class SimpleAulaDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
 	@NotBlank
-	private String day;
+	private Integer classe;
 	@NotBlank
 	@Positive
 	private Integer num;
-	private ProfessorDTO professor;
-	private ClasseDTO classe;
-	private Turn turn;
+	@NotBlank
+	private String day;
+	private SimpleProfessorDTO professor;
+	@NotBlank
+	private String turn;
 
-	public AulaDTO() {
+	public SimpleAulaDTO() {
 	}
 
-	public AulaDTO(Long id, String day, Integer num, ProfessorDTO professor, ClasseDTO classe, Turn turn) {
+	public SimpleAulaDTO(Long id, String day, Integer num, SimpleProfessorDTO professor, ClasseDTO classe,
+			String turn) {
 		this.id = id;
 		this.day = day;
 		this.num = num;
 		this.professor = professor;
-		this.classe = classe;
+		this.classe = classe.getNumber();
 		this.turn = turn;
 	}
 
-	public AulaDTO(Aula aula) {
+	public SimpleAulaDTO(Aula aula) {
 		this.id = aula.getId();
 		this.day = aula.getDay();
 		this.num = aula.getNum();
-		this.professor = new ProfessorDTO(aula.getProfessor());
-		this.classe = new ClasseDTO(aula.getClasse());
-		this.turn = aula.getTurn();
+		this.professor = new SimpleProfessorDTO(aula.getProfessor());
+		this.classe = aula.getClasse().getNumber();
+		this.turn = aula.getTurn().toString();
 	}
 
 	public Long getId() {
@@ -66,27 +68,27 @@ public class AulaDTO implements Serializable {
 		this.num = num;
 	}
 
-	public ProfessorDTO getProfessor() {
+	public SimpleProfessorDTO getProfessor() {
 		return professor;
 	}
 
-	public void setProfessor(ProfessorDTO professor) {
+	public void setProfessor(SimpleProfessorDTO professor) {
 		this.professor = professor;
 	}
 
-	public ClasseDTO getClasse() {
+	public Integer getClasse() {
 		return classe;
 	}
 
-	public void setClasse(ClasseDTO classe) {
+	public void setClasse(Integer classe) {
 		this.classe = classe;
 	}
 
-	public Turn getTurn() {
+	public String getTurn() {
 		return turn;
 	}
 
-	public void setTurn(Turn turn) {
+	public void setTurn(String turn) {
 		this.turn = turn;
 	}
 
