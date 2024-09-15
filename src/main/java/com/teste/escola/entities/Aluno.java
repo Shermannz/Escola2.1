@@ -1,8 +1,13 @@
 package com.teste.escola.entities;
 
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -10,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -20,14 +26,21 @@ public class Aluno {
 	private Long id;
 	private String name;
 	private Integer age;
-	
+
 	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
 	private Instant moment;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "classe_id")
 	private Classe classe;
-	
+
+	// TODO corrigir relacionamento
+	@OneToMany(mappedBy = "aluno", cascade = CascadeType.ALL)
+	List<Score> scores = new ArrayList<>();
+
+	@OneToMany(mappedBy = "aluno")
+	Set<Exercise> exercises = new HashSet<>();
+
 	public Aluno() {
 	}
 
@@ -79,7 +92,7 @@ public class Aluno {
 	public Classe getClasse() {
 		return classe;
 	}
-	
+
 	public void setClasse(Classe classe) {
 		this.classe = classe;
 	}
@@ -96,6 +109,13 @@ public class Aluno {
 		return Objects.equals(age, other.age) && Objects.equals(id, other.id) && Objects.equals(moment, other.moment)
 				&& Objects.equals(name, other.name);
 	}
-	
-	
+
+	public List<Score> getScores() {
+		return scores;
+	}
+
+	public Set<Exercise> getExercises() {
+		return exercises;
+	}
+
 }

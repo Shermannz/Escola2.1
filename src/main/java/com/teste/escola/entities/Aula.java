@@ -23,6 +23,9 @@ public class Aula {
 	private Turn turn;
 
 	@ManyToOne
+	private Exercise exercise;
+
+	@ManyToOne
 	@JoinColumn(name = "professor_id")
 	private Professor professor;
 
@@ -33,20 +36,13 @@ public class Aula {
 	public Aula() {
 	}
 
-	public Aula(Long id, String day, Integer num, Classe classe, Turn turn) {
+	public Aula(Long id, String day, Integer num, Classe classe, Turn turn, Exercise exercise) {
 		this.id = id;
 		this.day = day;
 		this.num = num;
 		this.classe = classe;
 		this.turn = turn;
-	}
-
-	public Aula(Long id, String day, Integer num, Professor professor, Classe classe) {
-		this.id = id;
-		this.day = day;
-		this.num = num;
-		this.professor = professor;
-		this.classe = classe;
+		this.exercise = exercise;
 	}
 
 	public Long getId() {
@@ -95,6 +91,21 @@ public class Aula {
 
 	public void setTurn(Turn turn) {
 		this.turn = turn;
+	}
+
+	public Exercise getExercise() {
+		return exercise;
+	}
+
+	public void setExercise(Exercise exercise) {
+		this.exercise = exercise;
+	}
+
+	// TODO revisar esse metodo
+	public void metodoTeste() {
+		for (Aluno aluno : classe.getAlunos()) {
+			aluno.getExercises().add(exercise);
+		}
 	}
 
 	@Override
