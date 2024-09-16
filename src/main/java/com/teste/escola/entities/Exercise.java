@@ -1,11 +1,13 @@
 package com.teste.escola.entities;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import com.teste.escola.entities.enums.Subject;
@@ -19,23 +21,17 @@ public class Exercise {
     private Long id;
     private String challenge;
     private Subject subject;
-    private Integer hits;
-    private Integer errors;
-
-    @ManyToOne
-    @JoinColumn(name = "aluno_id")
-    private Aluno aluno;
+    // TODO corrigir relacionamento
+    @ManyToMany
+    private Set<Score> exercises = new HashSet<>();
 
     public Exercise() {
     }
 
-    public Exercise(Long id, String challenge, Subject subject, Integer hits, Integer errors, Aluno aluno) {
+    public Exercise(Long id, String challenge, Subject subject) {
         this.id = id;
         this.challenge = challenge;
         this.subject = subject;
-        this.hits = hits;
-        this.errors = errors;
-        this.aluno = aluno;
     }
 
     public Long getId() {
@@ -60,22 +56,6 @@ public class Exercise {
 
     public void setSubject(Subject subject) {
         this.subject = subject;
-    }
-
-    public Integer getHits() {
-        return hits;
-    }
-
-    public void setHits(Integer hits) {
-        this.hits = hits;
-    }
-
-    public Integer getErrors() {
-        return errors;
-    }
-
-    public void setErrors(Integer errors) {
-        this.errors = errors;
     }
 
 }

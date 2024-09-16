@@ -101,13 +101,6 @@ public class Aula {
 		this.exercise = exercise;
 	}
 
-	// TODO revisar esse metodo
-	public void metodoTeste() {
-		for (Aluno aluno : classe.getAlunos()) {
-			aluno.getExercises().add(exercise);
-		}
-	}
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);

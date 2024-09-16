@@ -3,7 +3,6 @@ package com.teste.escola.entities;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -15,7 +14,7 @@ import com.teste.escola.entities.enums.Subject;
 public class Professor extends User {
 	private Subject subject;
 
-	@OneToMany(mappedBy = "professor", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "professor")
 	Set<Aula> aula = new HashSet<>();
 
 	public Professor() {

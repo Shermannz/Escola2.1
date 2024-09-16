@@ -1,10 +1,14 @@
 package com.teste.escola.entities;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -23,8 +27,9 @@ public class Score {
     private Aluno aluno;
     private Subject subject;
 
-// TODO corrigir relacionamento
-//    private List<Exercise> exercises = new ArrayList<>();
+    // TODO corrigir relacionamento
+    @ManyToMany
+    private Set<Exercise> exercises = new HashSet<>();
 
     public Score(Long id, Double score, Aluno aluno, Subject subject) {
         this.id = id;

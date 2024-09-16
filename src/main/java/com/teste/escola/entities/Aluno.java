@@ -2,12 +2,9 @@ package com.teste.escola.entities;
 
 import java.time.Instant;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -34,12 +31,8 @@ public class Aluno {
 	@JoinColumn(name = "classe_id")
 	private Classe classe;
 
-	// TODO corrigir relacionamento
-	@OneToMany(mappedBy = "aluno", cascade = CascadeType.ALL)
-	List<Score> scores = new ArrayList<>();
-
 	@OneToMany(mappedBy = "aluno")
-	Set<Exercise> exercises = new HashSet<>();
+	List<Score> scores = new ArrayList<>();
 
 	public Aluno() {
 	}
@@ -112,10 +105,6 @@ public class Aluno {
 
 	public List<Score> getScores() {
 		return scores;
-	}
-
-	public Set<Exercise> getExercises() {
-		return exercises;
 	}
 
 }
