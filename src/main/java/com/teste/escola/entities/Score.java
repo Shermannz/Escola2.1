@@ -12,8 +12,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.teste.escola.entities.enums.Subject;
-
 @Entity
 @Table(name = "tb_score")
 public class Score {
@@ -25,17 +23,14 @@ public class Score {
     @ManyToOne
     @JoinColumn(name = "aluno_id")
     private Aluno aluno;
-    private Subject subject;
 
-    // TODO corrigir relacionamento
-    @ManyToMany
+    @ManyToMany(mappedBy = "scores")
     private Set<Exercise> exercises = new HashSet<>();
 
-    public Score(Long id, Double score, Aluno aluno, Subject subject) {
+    public Score(Long id, Double score, Aluno aluno) {
         this.id = id;
         this.score = score;
         this.aluno = aluno;
-        this.subject = subject;
     }
 
     public Long getId() {
@@ -60,14 +55,6 @@ public class Score {
 
     public void setAluno(Aluno aluno) {
         this.aluno = aluno;
-    }
-
-    public Subject getSubject() {
-        return subject;
-    }
-
-    public void setSubject(Subject subject) {
-        this.subject = subject;
     }
 
 }

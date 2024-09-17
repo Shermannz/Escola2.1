@@ -7,10 +7,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import com.teste.escola.entities.enums.Subject;
 
 @Entity
 @Table(name = "tb_exercise")
@@ -20,18 +22,26 @@ public class Exercise {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String challenge;
-    private Subject subject;
-    // TODO corrigir relacionamento
+
+    @OneToOne(mappedBy = "exercise")
+    private Aula aula;
+
+    // DEFINA AS REGRAS NO SERVICE
+    @ManyToOne
+    @JoinColumn(name = "professor_id")
+    private Professor professor;
+
     @ManyToMany
-    private Set<Score> exercises = new HashSet<>();
+    @JoinTable(name = "tb_exercise_score", joinColumns = @JoinColumn(name = "exercise_id"), inverseJoinColumns = @JoinColumn(name = "score_id"))
+    private Set<Score> scores = new HashSet<>();
 
     public Exercise() {
     }
 
-    public Exercise(Long id, String challenge, Subject subject) {
+    public Exercise(Long id, String challenge, Professor professor) {
         this.id = id;
         this.challenge = challenge;
-        this.subject = subject;
+        this.professor = professor;
     }
 
     public Long getId() {
@@ -50,12 +60,20 @@ public class Exercise {
         this.challenge = challenge;
     }
 
-    public Subject getSubject() {
-        return subject;
+    public Aula getAula() {
+        return aula;
     }
 
-    public void setSubject(Subject subject) {
-        this.subject = subject;
+    public void setAula(Aula aula) {
+        this.aula = aula;
+    }
+
+    public Professor getProfessor() {
+        return professor;
+    }
+
+    public void setProfessor(Professor professor) {
+        this.professor = professor;
     }
 
 }

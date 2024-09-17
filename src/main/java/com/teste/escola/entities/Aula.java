@@ -8,6 +8,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import com.teste.escola.entities.enums.Turn;
@@ -22,7 +23,8 @@ public class Aula {
 	private Integer num;
 	private Turn turn;
 
-	@ManyToOne
+	@OneToOne
+	@JoinColumn(name = "exercise_id")
 	private Exercise exercise;
 
 	@ManyToOne
