@@ -1,10 +1,12 @@
-package com.teste.escola.dto;
+package com.teste.escola.dto.simple;
 
 import java.io.Serializable;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
 
+import com.teste.escola.dto.ClasseDTO;
+import com.teste.escola.dto.ExerciseDTO;
 import com.teste.escola.entities.Aula;
 
 public class SimpleAulaDTO implements Serializable {
@@ -18,30 +20,34 @@ public class SimpleAulaDTO implements Serializable {
 	private Integer num;
 	@NotBlank
 	private String day;
-	private SimpleProfessorDTO professor;
 	@NotBlank
 	private String turn;
+	private SimpleProfessorDTO professor;
+	private ExerciseDTO exercise;
 
 	public SimpleAulaDTO() {
 	}
 
-	public SimpleAulaDTO(Long id, String day, Integer num, SimpleProfessorDTO professor, ClasseDTO classe,
-			String turn) {
+	public SimpleAulaDTO(Long id, ClasseDTO classe, String day, Integer num, String turn, SimpleProfessorDTO professor,
+			ExerciseDTO exercise) {
 		this.id = id;
+		this.classe = classe.getNumber();
 		this.day = day;
 		this.num = num;
-		this.professor = professor;
-		this.classe = classe.getNumber();
 		this.turn = turn;
+		this.professor = professor;
+		this.exercise = exercise;
 	}
 
 	public SimpleAulaDTO(Aula aula) {
 		this.id = aula.getId();
+		this.classe = aula.getClasse().getNumber();
 		this.day = aula.getDay();
 		this.num = aula.getNum();
-		this.professor = new SimpleProfessorDTO(aula.getProfessor());
-		this.classe = aula.getClasse().getNumber();
 		this.turn = aula.getTurn().toString();
+		this.professor = new SimpleProfessorDTO(aula.getProfessor());
+		this.exercise = new ExerciseDTO(aula.getExercise());
+
 	}
 
 	public Long getId() {
@@ -68,6 +74,14 @@ public class SimpleAulaDTO implements Serializable {
 		this.num = num;
 	}
 
+	public String getTurn() {
+		return turn;
+	}
+
+	public void setTurn(String turn) {
+		this.turn = turn;
+	}
+
 	public SimpleProfessorDTO getProfessor() {
 		return professor;
 	}
@@ -84,12 +98,12 @@ public class SimpleAulaDTO implements Serializable {
 		this.classe = classe;
 	}
 
-	public String getTurn() {
-		return turn;
+	public ExerciseDTO getExercise() {
+		return exercise;
 	}
 
-	public void setTurn(String turn) {
-		this.turn = turn;
+	public void setExercise(ExerciseDTO exercise) {
+		this.exercise = exercise;
 	}
 
 }

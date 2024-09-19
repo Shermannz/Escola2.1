@@ -27,6 +27,9 @@ public class Score {
     @ManyToMany(mappedBy = "scores")
     private Set<Exercise> exercises = new HashSet<>();
 
+    public Score() {
+    }
+
     public Score(Long id, Double score, Aluno aluno) {
         this.id = id;
         this.score = score;
@@ -55,6 +58,10 @@ public class Score {
 
     public void setAluno(Aluno aluno) {
         this.aluno = aluno;
+    }
+
+    public Set<Exercise> getExercises() {
+        return exercises;
     }
 
 }

@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.teste.escola.dto.AulaDTO;
-import com.teste.escola.dto.SimpleAulaDTO;
+import com.teste.escola.dto.simple.SimpleAulaDTO;
 import com.teste.escola.services.AulaService;
 
 @RestController

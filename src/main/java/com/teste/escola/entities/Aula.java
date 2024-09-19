@@ -71,22 +71,6 @@ public class Aula {
 		this.num = num;
 	}
 
-	public Professor getProfessor() {
-		return professor;
-	}
-
-	public void setProfessor(Professor professor) {
-		this.professor = professor;
-	}
-
-	public Classe getClasse() {
-		return classe;
-	}
-
-	public void setClasse(Classe classe) {
-		this.classe = classe;
-	}
-
 	public Turn getTurn() {
 		return turn;
 	}
@@ -101,6 +85,22 @@ public class Aula {
 
 	public void setExercise(Exercise exercise) {
 		this.exercise = exercise;
+	}
+
+	public Professor getProfessor() {
+		return professor;
+	}
+
+	public void setProfessor(Professor professor) {
+		this.professor = professor;
+	}
+
+	public Classe getClasse() {
+		return classe;
+	}
+
+	public void setClasse(Classe classe) {
+		this.classe = classe;
 	}
 
 	@Override

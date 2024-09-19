@@ -1,8 +1,6 @@
 package com.teste.escola.entities;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -18,9 +16,6 @@ public class Professor extends User {
 
 	@OneToMany(mappedBy = "professor")
 	Set<Aula> aula = new HashSet<>();
-
-	@OneToMany(mappedBy = "professor")
-	List<Exercise> exercises = new ArrayList<>();
 
 	public Professor() {
 	}

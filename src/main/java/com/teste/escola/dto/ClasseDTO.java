@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.teste.escola.dto.simple.SimpleAlunoDTO;
 import com.teste.escola.entities.Aluno;
 import com.teste.escola.entities.Classe;
 

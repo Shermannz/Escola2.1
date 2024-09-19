@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Positive;
 
+import com.teste.escola.dto.simple.SimpleClasseDTO;
+import com.teste.escola.dto.simple.SimpleProfessorDTO;
 import com.teste.escola.entities.Aula;
 import com.teste.escola.entities.enums.Turn;
 
@@ -17,29 +19,32 @@ public class AulaDTO implements Serializable {
 	@NotBlank
 	@Positive
 	private Integer num;
-	private ProfessorDTO professor;
-	private ClasseDTO classe;
 	private Turn turn;
+	private SimpleProfessorDTO professor;
+	private ExerciseDTO exercise;
+	private SimpleClasseDTO classe;
 
 	public AulaDTO() {
 	}
 
-	public AulaDTO(Long id, String day, Integer num, ProfessorDTO professor, ClasseDTO classe, Turn turn) {
+	public AulaDTO(Long id, String day, Integer num, Turn turn, SimpleProfessorDTO professor, ExerciseDTO exercise,
+			SimpleClasseDTO classe) {
 		this.id = id;
 		this.day = day;
 		this.num = num;
-		this.professor = professor;
-		this.classe = classe;
 		this.turn = turn;
+		this.professor = professor;
+		this.exercise = exercise;
+		this.classe = classe;
 	}
 
 	public AulaDTO(Aula aula) {
 		this.id = aula.getId();
 		this.day = aula.getDay();
 		this.num = aula.getNum();
-		this.professor = new ProfessorDTO(aula.getProfessor());
-		this.classe = new ClasseDTO(aula.getClasse());
 		this.turn = aula.getTurn();
+		this.professor = new SimpleProfessorDTO(aula.getProfessor());
+		this.classe = new SimpleClasseDTO(aula.getClasse());
 	}
 
 	public Long getId() {
@@ -66,28 +71,36 @@ public class AulaDTO implements Serializable {
 		this.num = num;
 	}
 
-	public ProfessorDTO getProfessor() {
-		return professor;
-	}
-
-	public void setProfessor(ProfessorDTO professor) {
-		this.professor = professor;
-	}
-
-	public ClasseDTO getClasse() {
-		return classe;
-	}
-
-	public void setClasse(ClasseDTO classe) {
-		this.classe = classe;
-	}
-
 	public Turn getTurn() {
 		return turn;
 	}
 
 	public void setTurn(Turn turn) {
 		this.turn = turn;
+	}
+
+	public SimpleProfessorDTO getProfessor() {
+		return professor;
+	}
+
+	public void setProfessor(SimpleProfessorDTO professor) {
+		this.professor = professor;
+	}
+
+	public ExerciseDTO getExercise() {
+		return exercise;
+	}
+
+	public void setExercise(ExerciseDTO exercise) {
+		this.exercise = exercise;
+	}
+
+	public SimpleClasseDTO getClasse() {
+		return classe;
+	}
+
+	public void setClasse(SimpleClasseDTO classe) {
+		this.classe = classe;
 	}
 
 }

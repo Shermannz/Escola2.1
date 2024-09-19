@@ -1,4 +1,4 @@
-package com.teste.escola.dto;
+package com.teste.escola.dto.simple;
 
 import java.io.Serializable;
 
