@@ -21,6 +21,8 @@ public class Exercise {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String challenge;
+    private int successes;
+    private int mistakes;
 
     @OneToOne(mappedBy = "exercise")
     private Aula aula;
@@ -32,9 +34,11 @@ public class Exercise {
     public Exercise() {
     }
 
-    public Exercise(Long id, String challenge) {
+    public Exercise(Long id, String challenge, int successes, int mistakes) {
         this.id = id;
         this.challenge = challenge;
+        this.successes = successes;
+        this.mistakes = mistakes;
     }
 
     public Long getId() {
@@ -53,6 +57,22 @@ public class Exercise {
         this.challenge = challenge;
     }
 
+    public int getSuccesses() {
+        return successes;
+    }
+
+    public void setSuccesses(int successes) {
+        this.successes = successes;
+    }
+
+    public int getMistakes() {
+        return mistakes;
+    }
+
+    public void setMistakes(int mistakes) {
+        this.mistakes = mistakes;
+    }
+
     public Aula getAula() {
         return aula;
     }
@@ -60,4 +80,5 @@ public class Exercise {
     public void setAula(Aula aula) {
         this.aula = aula;
     }
+
 }

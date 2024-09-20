@@ -27,6 +27,8 @@ public class ExerciseService {
     public ExerciseDTO insert(ExerciseDTO dto) {
         Exercise exercise = new Exercise();
         exercise.setChallenge(dto.getChallenge());
+        exercise.setSuccesses(dto.getSuccesses());
+        exercise.setMistakes(dto.getMistakes());
         repository.save(exercise);
         return new ExerciseDTO(exercise);
     }
@@ -34,6 +36,8 @@ public class ExerciseService {
     public ExerciseDTO update(Long id, ExerciseDTO dto) {
         Exercise exercise = repository.findById(id).get();
         exercise.setChallenge(dto.getChallenge());
+        exercise.setSuccesses(dto.getSuccesses());
+        exercise.setMistakes(dto.getMistakes());
         repository.save(exercise);
         return new ExerciseDTO(exercise);
     }

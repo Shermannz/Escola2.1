@@ -14,7 +14,7 @@ INSERT INTO tb_aluno (name,age,moment,classe_id) VALUES ('Julio',16,TIMESTAMP WI
 
 INSERT INTO tb_score(score, aluno_id) VALUES (10.0, 1)
 
-INSERT INTO tb_exercise(challenge) VALUES ('escrever um texto')
+INSERT INTO tb_exercise(challenge, successes, mistakes) VALUES ('escrever um texto', 5, 5)
 
 INSERT INTO tb_exercise_score(exercise_id, score_id) VALUES (1,1);
 

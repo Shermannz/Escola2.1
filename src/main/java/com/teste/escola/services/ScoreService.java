@@ -36,13 +36,16 @@ public class ScoreService {
 
     public ScoreDTO insert(ScoreDTO dto) {
         Score score = new Score();
-        score.setScore(dto.getScore());
         score.setAluno(alunoRepository.findById(dto.getAluno().getId()).get());
+        // TODO reavaliar metodo, criar atualização
+        double total = 0;
         for (ExerciseDTO exerciseDTO : dto.getExercises()) {
-            // TODO ideia: só aceitar de determinado professor
             Exercise exercise = exerciseRepository.getById(exerciseDTO.getId());
+            total += exercise.getSuccesses() - exercise.getMistakes();
             score.getExercises().add(exercise);
         }
+        total = total / dto.getExercises().size();
+        score.setScore(total);
         return new ScoreDTO(repository.save(score));
     }
 

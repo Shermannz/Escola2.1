@@ -3,6 +3,7 @@ package com.teste.escola.dto;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.teste.escola.dto.simple.SimpleAlunoDTO;
 import com.teste.escola.entities.Exercise;
 import com.teste.escola.entities.Score;
 
@@ -10,14 +11,14 @@ public class ScoreDTO {
     private Long id;
     private Double score;
 
-    private AlunoDTO aluno;
+    private SimpleAlunoDTO aluno;
 
     private List<ExerciseDTO> exercises = new ArrayList<>();
 
     public ScoreDTO() {
     }
 
-    public ScoreDTO(Long id, Double score, AlunoDTO aluno) {
+    public ScoreDTO(Long id, Double score, SimpleAlunoDTO aluno) {
         this.id = id;
         this.score = score;
         this.aluno = aluno;
@@ -26,7 +27,7 @@ public class ScoreDTO {
     public ScoreDTO(Score score) {
         this.id = score.getId();
         this.score = score.getScore();
-        this.aluno = new AlunoDTO(score.getAluno());
+        this.aluno = new SimpleAlunoDTO(score.getAluno());
         for (Exercise exercise : score.getExercises()) {
             exercises.add(new ExerciseDTO(exercise));
         }
@@ -48,11 +49,11 @@ public class ScoreDTO {
         this.score = score;
     }
 
-    public AlunoDTO getAluno() {
+    public SimpleAlunoDTO getAluno() {
         return aluno;
     }
 
-    public void setAluno(AlunoDTO aluno) {
+    public void setAluno(SimpleAlunoDTO aluno) {
         this.aluno = aluno;
     }
 
